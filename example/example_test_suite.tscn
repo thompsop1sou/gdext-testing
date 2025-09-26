@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddhesf4vwrtrm"]
+
+[sub_resource type="ExampleTestCase1" id="ExampleTestCase1_5lspx"]
+
+[sub_resource type="ExampleTestCase2" id="ExampleTestCase2_bski3"]
+
+[node name="ExampleTestSuite" type="ExampleTestSuite"]
+example_test_case_1 = SubResource("ExampleTestCase1_5lspx")
+example_test_case_2 = SubResource("ExampleTestCase2_bski3")
