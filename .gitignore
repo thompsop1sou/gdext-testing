@@ -1,0 +1,9 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# C++ ignores
+*.o
+*.ghc
+*.os
+.sconsign.dblite
