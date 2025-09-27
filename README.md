@@ -2,11 +2,17 @@
 
 This is a simple testing library to use with C++ GDExtension projects.
 
-There are many libraries already available for testing pure C++ code. However, I couldn't find any libraries for testing Godot-specific C++ code (i.e. anything using any of the Godot types, functions, etc.). So I created this library for use in one of my own personal projects and thought I could share it with others as well.
+There are already many C++ testing libraries available out there. However, I couldn't find any libraries for testing Godot-specific C++ code (i.e. anything using any of the Godot types, functions, etc., which depend on a running instance of Godot). So I created this library for use in one of my personal projects and thought I could share it with others as well.
 
-Test suites and test cases can be written in C++. However, because of their dependence on Godot types, they must be compiled and run in the Godot editor, along with the GDExtension code that you are testing. I have an example test suite in this repo showing how this works. The C++ source code is at [src/example_test_suite.h](src/example_test_suite.h) and [src/example_test_suite.cpp](src/example_test_suite.cpp), and there is a scene using the example test suite at [example/example_test_suite.tscn](example/example_test_suite.tscn). The C++ source code for the testing library is in [src/testing](src/testing).
+Using this library, test suites and test cases can be written in C++. However, because of their dependence on Godot types, they must be compiled and run in the Godot editor, along with the GDExtension code that you are testing. I have an example test suite in this repo showing how this works. The C++ source code is at [src/example_test_suite.h](src/example_test_suite.h) and [src/example_test_suite.cpp](src/example_test_suite.cpp), and there is a scene using the example test suite at [example/example_test_suite.tscn](example/example_test_suite.tscn).
 
-## Elements
+>   **Note:** I've only compiled for Linux so far. So if you're on another system, you'll first have to compile for your system to see this example working in the Godot editor.
+
+The C++ source code for the testing library is in [src/testing](src/testing). To use this library in your own project, just copy these files into your GDExtension source code directory. Then create test suites and test cases as shown in the examples.
+
+## Description of Elements
+
+This testing library is made up of test suites, test cases, and checks. A test suite is a collection of test cases. And a test case is, at its most basic, just a function that runs some checks which can pass or fail.
 
 ### Test Suites
 
