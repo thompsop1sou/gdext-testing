@@ -40,6 +40,22 @@
 #define REGISTER_TEST_CASE(TestCaseName, test_case_name) \
     m_all_test_cases.push_back({#test_case_name, m_ ## test_case_name});
 
+#define BIND_TEST_CASE(TestSuiteName, TestCaseName, test_case_name) \
+    GDREGISTER_INTERNAL_CLASS(TestSuiteName::TestCaseName); \
+    ClassDB::bind_method(D_METHOD(vformat("get_%s", #test_case_name)), &TestSuiteName::get_ ## test_case_name); \
+    ClassDB::bind_method(D_METHOD(vformat("set_%s", #test_case_name), #test_case_name), &TestSuiteName::set_ ## test_case_name); \
+    ADD_PROPERTY( \
+        PropertyInfo( \
+            Variant::OBJECT, \
+            #test_case_name, \
+            PROPERTY_HINT_RESOURCE_TYPE, \
+            #TestCaseName, \
+            PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_EDITOR_INSTANTIATE_OBJECT \
+        ), \
+        vformat("set_%s", #test_case_name), \
+        vformat("get_%s", #test_case_name) \
+    );
+
 #define DEFINE_TEST_CASE(TestSuiteName, TestCaseName, test_case_name) \
     Ref<TestSuiteName::TestCaseName> TestSuiteName::get_ ## test_case_name() const \
     { \
@@ -56,22 +72,6 @@
             iter->second = m_ ## test_case_name; \
     } \
     void TestSuiteName::TestCaseName::test_body()
-
-#define BIND_TEST_CASE(TestSuiteName, TestCaseName, test_case_name) \
-    GDREGISTER_INTERNAL_CLASS(TestSuiteName::TestCaseName); \
-    ClassDB::bind_method(D_METHOD(vformat("get_%s", #test_case_name)), &TestSuiteName::get_ ## test_case_name); \
-    ClassDB::bind_method(D_METHOD(vformat("set_%s", #test_case_name), #test_case_name), &TestSuiteName::set_ ## test_case_name); \
-    ADD_PROPERTY( \
-        PropertyInfo( \
-            Variant::OBJECT, \
-            #test_case_name, \
-            PROPERTY_HINT_RESOURCE_TYPE, \
-            #TestCaseName, \
-            PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_EDITOR_INSTANTIATE_OBJECT \
-        ), \
-        vformat("set_%s", #test_case_name), \
-        vformat("get_%s", #test_case_name) \
-    );
 
 // Macros defining common return values for checks
 
@@ -249,9 +249,9 @@
         return check_result; \
     }()
 
-#define CHECK_TRUE(a) _CHECK_BOOL(a, , TRUE)
+#define CHECK_TRUE(EXPR) _CHECK_BOOL(EXPR, , TRUE)
 
-#define CHECK_FALSE(a) _CHECK_BOOL(a, !, FALSE)
+#define CHECK_FALSE(EXPR) _CHECK_BOOL(EXPR, !, FALSE)
 
 // Macros for comparing two values, A and B, using an operator, ==, !=, <, <=, >, or >=
 

@@ -1,10 +1,5 @@
 #include "example_test_suite.h"
 
-#include <godot_cpp/core/class_db.hpp>
-
-#include "testing/error_handler.h"
-#include "testing/test_macros.h"
-
 namespace godot
 {
     ExampleTestSuite::ExampleTestSuite()
