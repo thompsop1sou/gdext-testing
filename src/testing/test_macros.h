@@ -41,7 +41,7 @@
     m_all_test_cases.push_back({#test_case_name, m_ ## test_case_name});
 
 #define BIND_TEST_CASE(TestSuiteName, TestCaseName, test_case_name) \
-    GDREGISTER_INTERNAL_CLASS(TestSuiteName::TestCaseName); \
+    GDREGISTER_CLASS(TestSuiteName::TestCaseName); \
     ClassDB::bind_method(D_METHOD(vformat("get_%s", #test_case_name)), &TestSuiteName::get_ ## test_case_name); \
     ClassDB::bind_method(D_METHOD(vformat("set_%s", #test_case_name), #test_case_name), &TestSuiteName::set_ ## test_case_name); \
     ADD_PROPERTY( \
